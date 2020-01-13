@@ -15,16 +15,16 @@ import static org.junit.Assert.assertTrue;
  * Test class for ZipUtil class
  *
  */
-public class ZipUtilTest {
+public class ZipUtilityTest {
 
-	public static ZipUtils zip;
+	public static ZipUtility zip;
 
 	@Test
 	public void zipByteArray() throws FileNotFoundException, IOException, java.io.IOException, URISyntaxException {
 
 		byte[] data = Files
 				.readAllBytes(Paths.get(this.getClass().getClassLoader().getResource("SampleFile.txt").toURI()));
-		byte[] returnedzippedByteArray = ZipUtils.zipByteArray(data);
+		byte[] returnedzippedByteArray = ZipUtility.zipByteArray(data);
 		String outputFile = "compressedByteArray.zip";
 		Files.write(Paths.get(outputFile), returnedzippedByteArray);
 		File returnFile = new File(outputFile);
@@ -39,10 +39,10 @@ public class ZipUtilTest {
 
 		byte[] data = Files
 				.readAllBytes(Paths.get(this.getClass().getClassLoader().getResource("SampleFile.txt").toURI()));
-		byte[] returnedzippedByteArray = ZipUtils.zipByteArray(data);
+		byte[] returnedzippedByteArray = ZipUtility.zipByteArray(data);
 		String finalPath = "final.txt";
 
-		byte[] returnedunzipByteArray = ZipUtils.unzipByteArray(returnedzippedByteArray);
+		byte[] returnedunzipByteArray = ZipUtility.unzipByteArray(returnedzippedByteArray);
 		Files.write(Paths.get(finalPath), returnedunzipByteArray);
 		File returnFile = new File(finalPath);
 
@@ -154,7 +154,7 @@ public class ZipUtilTest {
 		ClassLoader classLoader = getClass().getClassLoader();
 		String zipFile = classLoader.getResource("test.zip").getFile();
 
-		boolean ren = ZipUtils.unZipDirectory(zipFile, outputUnZip);
+		boolean ren = ZipUtility.unZipDirectory(zipFile, outputUnZip);
 		assertTrue(ren);
 
 		File dir = new File(outputUnZip);
@@ -177,7 +177,7 @@ public class ZipUtilTest {
 	public void unZipDirNotFoundExceptionTest() throws FileNotFoundException, IOException {
 		String outputFile = "";
 		String outputUnZip = "";
-		ZipUtils.unZipDirectory(outputFile, outputUnZip);
+		ZipUtility.unZipDirectory(outputFile, outputUnZip);
 	}
 
 }

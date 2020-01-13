@@ -19,12 +19,12 @@ import java.util.zip.*;
  * 
  * This ZipUtil will not applicable for RAR or 7Z etc.
  */
-public class ZipUtils {
+public class ZipUtility {
 
 	/**
 	 * Private Constructor for ZipUtil Class
 	 */
-	private ZipUtils() {
+	private ZipUtility() {
 
 	}
 
