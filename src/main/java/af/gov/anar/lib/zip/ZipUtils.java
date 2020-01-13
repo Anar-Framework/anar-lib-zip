@@ -257,7 +257,7 @@ public class ZipUtils {
 		} catch (FileNotFoundException e) {
 			throw new FileNotFoundException(ZipUtilConstants.FILE_NOT_FOUND_ERROR_CODE.getErrorCode(),
 					ZipUtilConstants.FILE_NOT_FOUND_ERROR_CODE.getMessage(), e.getCause());
-		} catch (java.io.IOException e) {
+		} catch (IOException | java.io.IOException e) {
 			throw new IOException(ZipUtilConstants.IO_ERROR_CODE.getErrorCode(),
 					ZipUtilConstants.IO_ERROR_CODE.getMessage(), e.getCause());
 		}
@@ -314,7 +314,7 @@ public class ZipUtils {
 	 * @throws IOException           when file unable to read
 	 */
 	private static void createOutputFile(ZipInputStream zipInStream, File newFile)
-			throws IOException, FileNotFoundException, java.io.IOException {
+			throws IOException, FileNotFoundException {
 
 		byte[] buffer = new byte[1024];
 		try (FileOutputStream fos = new FileOutputStream(newFile)) {
@@ -325,6 +325,8 @@ public class ZipUtils {
 		} catch (FileSystemNotFoundException | java.io.FileNotFoundException e) {
 			throw new FileNotFoundException(ZipUtilConstants.FILE_NOT_FOUND_ERROR_CODE.getErrorCode(),
 					ZipUtilConstants.FILE_NOT_FOUND_ERROR_CODE.getMessage(), e.getCause());
+		} catch (java.io.IOException e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -377,7 +379,7 @@ public class ZipUtils {
 				zipIn.closeEntry();
 				entry = zipIn.getNextEntry();
 			}
-		} catch (java.io.FileNotFoundException e) {
+		} catch (FileNotFoundException e) {
 			throw new FileNotFoundException(ZipUtilConstants.FILE_NOT_FOUND_ERROR_CODE.getErrorCode(),
 					ZipUtilConstants.FILE_NOT_FOUND_ERROR_CODE.getMessage(), e.getCause());
 		} catch (IOException | java.io.IOException e) {
@@ -395,16 +397,13 @@ public class ZipUtils {
 	 * @param filePath output Directory
 	 * @throws IOException when file unable to read
 	 */
-	private static void extractFile(ZipInputStream zipIn, String filePath) throws IOException {
+	private static void extractFile(ZipInputStream zipIn, String filePath) throws IOException, java.io.FileNotFoundException {
 		try (BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(filePath))) {
 			byte[] bytesIn = new byte[10000];
 			int read = 0;
 			while ((read = zipIn.read(bytesIn)) != -1) {
 				bos.write(bytesIn, 0, read);
 			}
-		} catch (java.io.FileNotFoundException e) {
-			throw new FileNotFoundException(ZipUtilConstants.IO_ERROR_CODE.getErrorCode(),
-					ZipUtilConstants.IO_ERROR_CODE.getMessage(), e.getCause());
 		} catch (java.io.IOException e) {
 			throw new IOException(ZipUtilConstants.IO_ERROR_CODE.getErrorCode(),
 					ZipUtilConstants.IO_ERROR_CODE.getMessage(), e.getCause());
