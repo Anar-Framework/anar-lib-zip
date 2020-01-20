@@ -1,9 +1,9 @@
 package af.gov.anar.lib.zip;
 
 import af.gov.anar.lib.zip.util.ZipUtilConstants;
-import af.gov.anar.lib.zip.exception.DataFormatException;
-import af.gov.anar.lib.zip.exception.FileNotFoundException;
-import af.gov.anar.lib.zip.exception.IOException;
+import af.gov.anar.lang.infrastructure.exception.common.DataFormatException;
+import af.gov.anar.lang.infrastructure.exception.common.FileNotFoundException;
+import af.gov.anar.lang.infrastructure.exception.common.IOException;
 
 import java.io.*;
 import java.nio.file.FileSystemNotFoundException;
